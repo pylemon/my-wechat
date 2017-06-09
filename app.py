@@ -1,26 +1,20 @@
 #!/usr/bin/env python
 # coding=utf-8
-import sys
-default_encoding = 'utf-8'
-if sys.getdefaultencoding() != default_encoding:
-    reload(sys)
-    sys.setdefaultencoding(default_encoding)
-
 import logging
-import config
 
 from tornado import web
-from tornado.ioloop import IOLoop
 from tornado.httpserver import HTTPServer
+from tornado.ioloop import IOLoop
 from tornado.options import options, define
 from tornado.options import parse_command_line
 from tornado.options import parse_config_file
+
+import config
 
 config.init()
 
 
 class Application(web.Application):
-
     def __init__(self):
         from handlers import handlers
         settings = dict(
@@ -52,7 +46,13 @@ def main():
     server.listen(int(options.port))
     IOLoop.instance().start()
 
+
 if __name__ == '__main__':
+    import sys
+
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
+
     try:
         main()
     except (EOFError, KeyboardInterrupt):

@@ -4,8 +4,8 @@ import logging
 from tornado import web
 from tornado.options import options
 from wechatpy import parse_message, create_reply
-from wechatpy.utils import check_signature
 from wechatpy.exceptions import InvalidSignatureException
+from wechatpy.utils import check_signature
 
 from ai import AI
 
